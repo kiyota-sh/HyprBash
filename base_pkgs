@@ -1,0 +1,12 @@
+# Hyprland
+hyprland	# Wayland compositor
+kitty		# Terminal
+# Must have
+dunst		# Notification daemon
+pipewire	# pipewire
+
+# NVIDIA
+nvidia-dkms
+linux-headers
+nvidia-utils
+egl-wayland
