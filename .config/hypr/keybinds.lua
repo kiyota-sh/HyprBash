@@ -26,8 +26,7 @@ hl.bind(mainMod .. " + S", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Hoka
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
--- hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("menu -show drun")) -- Apps
-hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("menu -show window")) -- Windows
+hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd(menu .. " -show window")) -- Windows
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region")) --clipboard-only
 hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("hyprshot -m output"))
 
