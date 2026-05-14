@@ -44,3 +44,6 @@ hl.window_rule({
     float = true,
 })
 
+hl.window_rule({ match = { class = "kitty" }, opacity = "0.85" })
+hl.window_rule({ match = { class = "firefox" }, opacity = "0.85" })
+hl.window_rule({ match = { class = "Spotify" }, opacity = "0.85" })
