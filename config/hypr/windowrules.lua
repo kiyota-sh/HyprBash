@@ -44,6 +44,9 @@ hl.window_rule({
     float = true,
 })
 
-hl.window_rule({ match = { class = "kitty" }, opacity = "0.85" })
-hl.window_rule({ match = { class = "firefox" }, opacity = "0.85" })
-hl.window_rule({ match = { class = "Spotify" }, opacity = "0.85" })
+hl.window_rule({ match = { class = "kitty" }, opacity = "0.9" })
+hl.window_rule({ match = { class = "firefox" }, opacity = "0.9" })
+hl.window_rule({ match = { class = "Spotify" }, opacity = "0.9" })
+hl.window_rule({ match = { class = "yazi" }, opacity = "0.9", float = true, size = {1000, 600}, move = {"cursor_x-(window_w*0.5))", "(cursor_y-(window_h*0.5))"} })
+
+

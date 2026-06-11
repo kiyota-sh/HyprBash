@@ -17,30 +17,9 @@ qt6-wayland				# ||
 hyprpicker				# Color picker
 hyprshot				# Screenshot
 cliphist				# Clipboard manager
-
-
-
-# NVIDIA
-nvidia-dkms
-linux-headers
-nvidia-utils
-egl-wayland
-
-
-# Developer
-git					# Git
-less					# Git pager
-cmake					# 
-valgrind				# 
-openssh					# SSH
-jdk-openjdk				# Java
-netbeans				#
-
-
-# Hoka
-cava
-pear-desktop
-spotify-launcher
-obs-studio
-# Fonts
-noto-fonts-cjk
+rofi
+yazi
+thunar
+zip
+unzip
+wlogout

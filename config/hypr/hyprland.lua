@@ -17,7 +17,7 @@
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
     output   = "DP-2",
-    mode     = "highrr",
+    mode     = "2560x1440@165",
     position = "auto",
     scale    = "auto",
 })
@@ -72,9 +72,7 @@ require("env")
 -----------------------
 ---- LOOK AND FEEL ----
 -----------------------
-require("lookandfeel.variables")
-require("lookandfeel.animations")
-require("lookandfeel.hoka")
+require("lookandfeel")
 
 ---------------------
 ---- KEYBINDINGS ----
