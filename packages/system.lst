@@ -1,25 +1,24 @@
 # Hyprland
-hyprland				# Wayland compositor
-kitty					# Terminal
+hyprland                          # Wayland compositor
+kitty                             # Terminal
 # Must have (highly recommended by Hyperland)
-dunst					# Notification daemon
-pipewire				# pipewire
-pipewire-alsa				# ||
-pipewire-pulse				# ||
-pipewire-audio				# ||
+dunst                             # Notification daemon
+pipewire                          # pipewire
+pipewire-alsa                     # ||
+pipewire-pulse                    # ||
+pipewire-audio                    # ||
 wireplumber
-xdg-desktop-portal-hyprland		# Hyprland's xdg-desktop-portal implementation
-hyprpolkitagent				# Authentication daemon
-qt5-wayland				# Qt Wayland support
-qt6-wayland				# ||
+xdg-desktop-portal-hyprland       # Hyprland's xdg-desktop-portal implementation
+hyprpolkitagent                   # Authentication daemon
+qt5-wayland                       # Qt Wayland support
+qt6-wayland                       # ||
 # Hokano
-# awww					# An Answer to your Wayland Wallpaper Woes
-hyprpicker				# Color picker
-hyprshot				# Screenshot
-cliphist				# Clipboard manager
+# awww                            # An Answer to your Wayland Wallpaper Woes
+hyprpicker                        # Color picker
+hyprshot                          # Screenshot
+cliphist                          # Clipboard manager
 rofi
 yazi
 thunar
 zip
 unzip
-wlogout

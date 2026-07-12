@@ -1,12 +1,12 @@
 # Developer
-git					# Git
-less					# Git pager
-cmake					# 
-valgrind				# 
-openssh					# SSH
-jdk-openjdk				# Java
-dotnet-sdb				# C#
-dotnet-runtime				# ||
+git               # Git
+less              # Git pager
+cmake             # 
+valgrind          #
+openssh           # SSH
+jdk-openjdk       # Java
+dotnet-sdb        # C#
+dotnet-runtime    # ||
 
 docker
 docker-compose
