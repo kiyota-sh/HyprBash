@@ -30,10 +30,10 @@ _process_list_install() {
     # Query pacman sync database (suppress output)
     if pacman -Si "$pkg" &>/dev/null; then
       pacman_packages+=("$pkg")
-    # If not in pacman, query yay (AUR)
+      # If not in pacman, query yay (AUR)
     elif yay -Si "$pkg" &>/dev/null; then
       aur_packages+=("$pkg")
-    # If neither finds if, flag as error
+      # If neither finds if, flag as error
     else
       error_packages+=("$pkg")
     fi
