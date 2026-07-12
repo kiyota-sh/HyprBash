@@ -14,12 +14,13 @@ local menu = "rofi"
 local browser = "firefox"
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local home = os.getenv("HOME")
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(
-	mainMod .. " + DELETE",
+	mainMod .. " + ESCAPE",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
 )
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(gui))
@@ -32,8 +33,11 @@ hl.bind(mainMod .. " + S", hl.dsp.layout("togglesplit")) -- dwindle only
 -- Hoka
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
 hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd(menu .. " -show window")) -- Windows
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("hyprshot -m region")) --clipboard-only
-hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("hyprshot -m output"))
+hl.bind(
+	mainMod .. " + SHIFT + S",
+	hl.dsp.exec_cmd("hyprshot -m region --freeze -o " .. home .. "/Pictures/Screenshots")
+)
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd("hyprshot -m output -o " .. home .. "/Pictures/Screenshots"))
 -- Yazi
 hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(terminal .. " -e --class yazi " .. tui))
 --
