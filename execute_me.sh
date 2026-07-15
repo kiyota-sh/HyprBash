@@ -1,29 +1,52 @@
 #!/bin/bash
 
-# ./pkg_installer.sh
+source lib/ansi.sh
+source bin/pkg_installer.sh
 
-# Script arguments
-#while getopts "bdch" opt; do
-#	case $opt in
-#	b)
-#
-#	esac
-#done
+DO_MINIMAL=false
+DO_DEV=false
+DO_CUSTOM=false
+DO_NVIDIA=false
 
+show_help() {
+  echo -e "${TAG_INFO} Usage: ./execute_me.sh [OPTIONS]"
+  echo "  -m    Install Minimal profile (system.lst + hoka.lst)"
+  echo "  -d    Install Development profile (+ devel.lst)"
+  echo "  -c    Install Custom profile (+ custom.lst)"
+  echo "  -n    Install and configure NVIDIA drivers"
+  echo "  -h    Show this help message"
+}
 
-if [ -d "$HOME/clones/yay" ]; then
-	echo "YAY helper already installed"
-else
-	echo "Installing YAY helper"
-	mkdir -p "$HOME/clones"
-	git clone "https://aur.archlinux.org/yay.git" "$HOME/clones/yay"
-	cd "$HOME/clones/yay"
-	makepkg -si
+while getopts "mdcnh" opt; do
+  case $opt in
+  m) DO_MINIMAL=true ;;
+  d) DO_DEV=true ;;
+  c) DO_CUSTOM=true ;;
+  n) DO_NVIDIA=true ;;
+  h)
+    show_help
+    exit 0
+    ;;
+  \?)
+    show_help
+    exit 1
+    ;;
+  esac
+done
 
-	if [ $? -eq 0 ]; then
-		echo "Helper installed, no errors"
-	fi
+if [ $OPTIND -eq 1 ]; then
+  echo -e "${TAG_ERROR} No flags provided."
+  show_help
+  exit 1
 fi
 
-# Symlinks
-ln -s ~/HyprBash/.config/* ~/.config
+# 1. Profile based package installation
+execute_install "$DO_MINIMAL" "$DO_DEV" "$DO_CUSTOM"
+
+# 2. NVIDIA Config
+if $DO_NVIDIA; then
+  bash bin/nvidia_config.sh
+fi
+
+# Symlinks ls -l ~/.config
+ln -s ~/HyprBash/config/* ~/.config
