@@ -1,6 +1,8 @@
 #!/bin/bash
 
 source lib/ansi.sh
+source lib/queue.sh
+source lib/countdown.sh
 
 # Private function to handle the actual parsing and installation of a single list
 _process_list_install() {
@@ -9,7 +11,7 @@ _process_list_install() {
   # 1. Verify existance
   if [[ ! -f "$lst_file" ]]; then
     echo -e "${TAG_SKIP} File '$lst_file' not found."
-    return 0
+    return 1
   fi
 
   # 2. Parse file into a raw package array
@@ -18,15 +20,19 @@ _process_list_install() {
 
   if [[ ${#raw_pkg_array[@]} -eq 0 ]]; then
     echo -e "${TAG_SKIP} No packages found in $lst_file."
-    return 0
+    return 1
   fi
+
+  # 3. Remove duplicates
+  local unique_pkgs=($(printf "%s\n" "${raw_pkg_array[@]}" | sort -u))
 
   local pacman_packages=()
   local aur_packages=()
   local error_packages=()
 
-  echo "${TAG_INFO} Sorting ${#raw_pkg_array[@]} packages (this may take a moment)..."
-  for pkg in "${raw_pkg_array[@]}"; do
+  # 4. Queue packages
+  echo -e "${TAG_INFO} Sorting ${#unique_pkgs[@]} packages (this may take a moment)..."
+  for pkg in "${unique_pkgs[@]}"; do
     # Query pacman sync database (suppress output)
     if pacman -Si "$pkg" &>/dev/null; then
       pacman_packages+=("$pkg")
@@ -39,17 +45,23 @@ _process_list_install() {
     fi
   done
 
-  # 3. Install Pacman packages
+  # 5. Display the Queues
+  display_queue "PACMAN" "${pacman_packages[@]}"
+  display_queue "AUR" "${aur_packages[@]}"
+  display_queue "ERROR" "${error_packages[@]}"
+  countdown
+
+  # 5. Install Pacman packages
   if [[ ${#pacman_packages[@]} -gt 0 ]]; then
     echo -e "${TAG_PACMAN} Installing ${#pacman_packages[@]} official packages..."
     sudo pacman -S --needed --noconfirm "${pacman_packages[@]}"
   fi
-  # 4. Install AUR packages
+  # 6. Install AUR packages
   if [[ ${#aur_packages[@]} -gt 0 ]]; then
     echo -e "${TAG_AUR} Installing ${#aur_packages[@]} AUR packages..."
     yay -S --needed --noconfirm "${aur_packages[@]}"
   fi
-  # 5. Report errors
+  # 7. Report errors
   if [[ ${#error_packages[@]} -gt 0 ]]; then
     echo -e "${TAG_ERROR} Packages NOT found in official repos or AUR:"
     for err_pkg in "${error_packages[@]}"; do
